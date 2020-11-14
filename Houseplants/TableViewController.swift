@@ -7,6 +7,8 @@
 
 import UIKit
 
+//consider putting a UItable view in a UITableViewCell for the categories
+
 var plants = ["Purple Oxalis", "Golden Pothos","Neon Pothos", "Monstera Adonsonaii", "Boston Fern", "Thai Basil"]
 
 var plantLocation = ["Bedroom", "Bedroom", "Living Room", "Living Room", "Bedroom", "Kitchen", "Kitchen"]
@@ -40,10 +42,13 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         cell.textLabel?.text = plants[indexPath.row]
 
         return cell
     }
+    
+   
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         plantIndex = indexPath.row
