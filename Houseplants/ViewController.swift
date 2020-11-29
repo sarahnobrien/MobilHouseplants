@@ -20,19 +20,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let locations = plantLoc[plantIndex].plantLocation
-        let plants = plantLoc[plantIndex].plants
-        let watered = plantLoc[plantIndex].lastWatered
+        let locations = plantLoc[locationIndex].plantLocation
+        let plants = plantLoc[locationIndex].plants
+        //let plants = plantLoc[plantIndex].plants
+        let watered = plantLoc[locationIndex].lastWatered
         
-        plantName?.text = plants?[plantIndex]
+        plantName?.text = plants[plantIndex]
         plantLocation?.text = locations
-        lastWatered?.text = watered?[plantIndex]
+        lastWatered?.text = watered[plantIndex]
         
         //plantName.text = plantLoc.plants[plantIndex]
         
         //plantLocations.text = plantLoc.plantLocation?
         
-        //plantName.text = plants[plantIndex]
+        //plantName.text = plants[plantIndex]["11/30/2020", "11/30/2020"] 
         //plantLocations.text = plantLocation[plantIndex]
         //waterDate.text = lastWatered[plantIndex]
         
