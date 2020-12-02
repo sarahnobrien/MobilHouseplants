@@ -7,27 +7,32 @@
 
 import UIKit
 
-class Houseplant: NSObject{
+class Houseplant: Codable{
+    
+    
     var plantLocation: String?
     var plantName: String?
     var lastWatered: String?
+    let plantKey: String
     
     init(plantLocation: String?, plantName: String?, lastWatered: String?){
         self.plantLocation = plantLocation
         self.plantName = plantName
         self.lastWatered = lastWatered
-        
-        super.init()
+        self.plantKey = UUID().uuidString
+        //super.init()
          }
+    
+    
     convenience init(random: Bool = false) {
      if random {
         let newPlant = ["Oxalis", "Monstera", "Thai Basil"]
         let newLocation = ["Kitchen", "Bedroom", "Living Room"]
         let newWatered = ["11/20/2020", "11/4/2020", "12/1/2020"]
-        
+
         var idx = arc4random_uniform(UInt32(newPlant.count))
         let randomPlant = newPlant[Int(idx)]
-        
+
         idx = arc4random_uniform(UInt32(newLocation.count))
         let randomLocation = newLocation[Int(idx)]
 
@@ -39,5 +44,10 @@ class Houseplant: NSObject{
      else {
             self.init(plantLocation: nil, plantName: nil, lastWatered: nil)
      }
+    }
+}
+extension Houseplant: Equatable{
+    static func ==(lhs: Houseplant, rhs: Houseplant) -> Bool{
+        return lhs.plantKey == rhs.plantKey
     }
 }

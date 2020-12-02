@@ -11,6 +11,10 @@ var locationIndex = 0
 class TableViewController: UITableViewController {
     
     var plantStore: PlantStore!
+    
+    required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+    }
 
     @IBAction func addNewItem(_ sender: UIButton){
         let newPlant = plantStore.createPlant()
@@ -45,6 +49,9 @@ class TableViewController: UITableViewController {
         let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
+        
+        //Houseplant.saveHouseplantsToUserDefaults(plants: plantStore.allPlants)
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

@@ -7,15 +7,30 @@
 
 import UIKit
 
-class PlantStore{
+class PlantStore {
     var allPlants = [Houseplant]()
     
+    let plantArchiveURL: URL = {
+            let documentsDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documentDirectory = documentsDirectories.first!
+            return documentDirectory.appendingPathComponent("plants").appendingPathExtension("plist")
+        }()
     
-    init(){
-        for _ in 0..<5{
-            createPlant()
+    init() {
+            if let data = try? Data(contentsOf: plantArchiveURL),
+                let archivedPlants = try? PropertyListDecoder().decode(Array<Houseplant>.self, from: data) {
+                allPlants = archivedPlants
+            }
         }
-    }
+    
+    
+    
+//    init(){
+//        for _ in 0..<5{
+//            createPlant()
+//        }
+//    }
+
     
     @discardableResult func createPlant() -> Houseplant {
          let newPlant = Houseplant(random: true)
@@ -26,11 +41,22 @@ class PlantStore{
     func removePlant(_ plant: Houseplant) {
      if let index = allPlants.index(of: plant) {
         allPlants.remove(at: index)
-     }
+        }
     }
+    func saveChanges() {
+            print("Saving items to: \(plantArchiveURL.path)")
+            let archivedPlants = try? PropertyListEncoder().encode(allPlants)
+            
+            do {
+                try archivedPlants?.write(to: plantArchiveURL, options: .noFileProtection)
+                print("Saved all ot the Items")
+            } catch {
+                print("Could not save any of the Items")
+            }
+        }
+}
     
-    
-    }
+
     
 
 
