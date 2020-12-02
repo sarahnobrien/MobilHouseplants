@@ -7,46 +7,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 //    @IBOutlet weak var plantName: UILabel?
 //    @IBOutlet weak var plantLocations: UILabel?
 //   // @IBOutlet weak var waterDate: UILabel!
 //
     
-    @IBOutlet weak var plantName: UILabel!
-    @IBOutlet weak var plantLocation: UILabel!
-    @IBOutlet weak var lastWatered: UILabel!
+    @IBOutlet weak var nameField: UITextField!
+    @IBOutlet weak var locationField: UITextField!
+    @IBOutlet weak var wateredField: UITextField!
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    var plant: Houseplant!
+    var plantStore: PlantStore!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-//
-//        let locations = plantLoc[locationIndex].plantLocation
-//        let plants = plantLoc[locationIndex].plants
-//        //let plants = plantLoc[plantIndex].plants
-//        let watered = plantLoc[locationIndex].lastWatered
-//
-//        plantName?.text = plants[plantIndex]
-//        plantLocation?.text = locations
-//        lastWatered?.text = watered[plantIndex]
-        
-        
-        
-        
-        //plantName.text = plantLoc.plants[plantIndex]
-        
-        //plantLocations.text = plantLoc.plantLocation?
-        
-        //plantName.text = plants[plantIndex]["11/30/2020", "11/30/2020"] 
-        //plantLocations.text = plantLocation[plantIndex]
-        //waterDate.text = lastWatered[plantIndex]
-        
-       
-        
+        nameField.text = plant.plantName
+        locationField.text = plant.plantLocation
+        wateredField.text = plant.lastWatered
     }
     
-
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+         // "Save" changes to item
+         plant.plantName = nameField.text ?? ""
+         plant.plantLocation = locationField.text ?? ""
+         plant.lastWatered = wateredField.text  ?? ""
+    }
 }
 

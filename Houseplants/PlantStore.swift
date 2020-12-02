@@ -10,16 +10,28 @@ import UIKit
 class PlantStore{
     var allPlants = [Houseplant]()
     
-//    init(){
-//        for _ in 0..<5{
-//            createPlant()
-//        }
-//    }
+    
+    init(){
+        for _ in 0..<5{
+            createPlant()
+        }
+    }
+    
     @discardableResult func createPlant() -> Houseplant {
          let newPlant = Houseplant(random: true)
          allPlants.append(newPlant)
          return newPlant
     }
-}
+    
+    func removePlant(_ plant: Houseplant) {
+     if let index = allPlants.index(of: plant) {
+        allPlants.remove(at: index)
+     }
+    }
+    
+    
+    }
+    
+
 
 

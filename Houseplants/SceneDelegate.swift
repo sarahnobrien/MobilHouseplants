@@ -21,8 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let appDelegate = UIApplication.shared.delegate as!AppDelegate
         let plantStore = appDelegate.plantStore
         let navController = window!.rootViewController as! UINavigationController
-        let plantController = navController.topViewController as! TableViewController
-        plantController.plantStore = plantStore
+        let tableViewController = navController.topViewController as! TableViewController
+        tableViewController.plantStore = plantStore
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -6,13 +6,8 @@
 //
 
 import UIKit
-
-//consider putting a UItable view in a UITableViewCell for the categories
-
-
 var plantIndex = 0
 var locationIndex = 0
-//var plantLoc  = [Item]()
 class TableViewController: UITableViewController {
     
     var plantStore: PlantStore!
@@ -39,6 +34,10 @@ class TableViewController: UITableViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+     super.viewWillAppear(animated)
+     tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,18 +45,10 @@ class TableViewController: UITableViewController {
         let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
         tableView.contentInset = insets
         tableView.scrollIndicatorInsets = insets
-//
-//        plantLoc.append(Item.init(plantLocation: "Kitchen", plants: ["Thai Basil", "Italian Parsely"], lastWatered: ["11/10/2020", "11/10/2020"]))
-//
-//        plantLoc.append(Item.init(plantLocation: "Bedroom", plants: ["Purple Oxalis", "Monstera"], lastWatered: ["11/30/2020", "11/30/2020"] ))
-//
-//        plantLoc.append(Item.init(plantLocation: "Living Room", plants: ["Neon Pothos", "Monstera Adonsonaii"], lastWatered: ["11/20/2020", "11/2/2020"] ))
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         //self.navigationItem.rightBarButtonItem = self.editButtonItem
         
     }
 
@@ -65,6 +56,7 @@ class TableViewController: UITableViewController {
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        // old return plantLoc.count
+//        return 3
 //    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,52 +76,64 @@ class TableViewController: UITableViewController {
 //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        //locationIndex = plantLoc[indexPath.section].plantLocation
 //    //old    return plantLoc[section].plantLocation
+//        let plantLocations = plantStore[section]
+//        //allPlants.plantLocation
+//        return plantLocations
 //    }
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            switch segue.identifier {
+                case "viewControllerSegue"?:
+                    if let row = tableView.indexPathForSelectedRow?.row {
+                        let plant = plantStore.allPlants[row]
+                        let viewController = segue.destination as! ViewController
+                        viewController.plant = plant
+                    }
+            default:
+                preconditionFailure("Unexpected seque identifier.")
+            }
+
+        }
    
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         plantIndex = indexPath.row
         locationIndex = indexPath.section
         performSegue(withIdentifier: "viewControllerSegue", sender: self)
-        
-        
-//        navigationController?.pushViewController(ViewController(), animated: true)
-        
-//        performSegue(withIdentifier: "segue", sender: self)
+
     }
     
 
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-    
-//    func showAlert() {
-//        let alert = UIAlertController(title: "Delete", message: "Are you sure you would like to delete this entry?", preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {action in
-//            print("cancelled")
-//        }))
-//        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {action in
-//            print("deleted")
-//        }))
-//        present(alert, animated: true)
+//    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        return .delete
 //    }
+    
+
    // Override to support editing the table view.
    
     // MARK: - DELETE PORTION COME BACK ASFJHBG. get so alert pops
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         //showAlert()
-
         if editingStyle == .delete {
-            //Delete the row from the data source
+            let plant = plantStore.allPlants[indexPath.row]
+            let title = "Delete \(plant.plantName!) ?"
+            let message = "Are you sure you would like to delete this plant?"
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            ac.addAction(cancelAction)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive,
+            handler: { (action) -> Void in
+                self.plantStore.removePlant(plant)
             //plantLoc[indexPath.section].plants[indexPath.row]
      //old       plantLoc[indexPath.section].plants.remove(at: indexPath.row)
            tableView.deleteRows(at: [indexPath], with: .fade)
-       } else if editingStyle == .insert {
-            //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-       }
+       })
+            ac.addAction(deleteAction)
+            present(ac, animated: true, completion: nil)
+//        else if editingStyle == .insert {
+//            //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//       }
    }
+    }
     
     
 

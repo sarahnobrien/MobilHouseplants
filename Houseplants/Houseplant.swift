@@ -35,8 +35,9 @@ class Houseplant: NSObject{
         let randomWatered = newWatered[Int(idx)]
 
         self.init(plantLocation: randomLocation, plantName: randomPlant, lastWatered: randomWatered)
-         } else {
-            self.init(plantLocation: "", plantName:"", lastWatered: "")
+         }
+     else {
+            self.init(plantLocation: nil, plantName: nil, lastWatered: nil)
      }
     }
 }
