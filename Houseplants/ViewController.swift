@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController{
+class ViewController: UIViewController, UITextFieldDelegate{
 //    @IBOutlet weak var plantName: UILabel?
 //    @IBOutlet weak var plantLocations: UILabel?
 //   // @IBOutlet weak var waterDate: UILabel!
@@ -33,7 +33,7 @@ class ViewController: UIViewController{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
-         // "Save" changes to item
+
          plant.plantName = nameField.text ?? ""
          plant.plantLocation = locationField.text ?? ""
          plant.lastWatered = wateredField.text  ?? ""
