@@ -16,6 +16,8 @@
 		4E7D680F255DEF0B00447317 /* HouseplantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7D680E255DEF0B00447317 /* HouseplantsTests.swift */; };
 		4E7D681A255DEF0B00447317 /* HouseplantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7D6819255DEF0B00447317 /* HouseplantsUITests.swift */; };
 		4E7D682B255DF2BB00447317 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7D682A255DF2BB00447317 /* TableViewController.swift */; };
+		4EAF194F2576C5F30053596A /* Houseplant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF194E2576C5F30053596A /* Houseplant.swift */; };
+		4EAF195C2576F2430053596A /* PlantStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EAF195B2576F2430053596A /* PlantStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		4E7D6819255DEF0B00447317 /* HouseplantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HouseplantsUITests.swift; sourceTree = "<group>"; };
 		4E7D681B255DEF0B00447317 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E7D682A255DF2BB00447317 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		4EAF194E2576C5F30053596A /* Houseplant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Houseplant.swift; sourceTree = "<group>"; };
+		4EAF195B2576F2430053596A /* PlantStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				4E7D6800255DEF0B00447317 /* Assets.xcassets */,
 				4E7D6802255DEF0B00447317 /* LaunchScreen.storyboard */,
 				4E7D6805255DEF0B00447317 /* Info.plist */,
+				4EAF194E2576C5F30053596A /* Houseplant.swift */,
+				4EAF195B2576F2430053596A /* PlantStore.swift */,
 			);
 			path = Houseplants;
 			sourceTree = "<group>";
@@ -261,10 +267,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EAF194F2576C5F30053596A /* Houseplant.swift in Sources */,
 				4E7D67FC255DEF0900447317 /* ViewController.swift in Sources */,
 				4E7D67F8255DEF0900447317 /* AppDelegate.swift in Sources */,
 				4E7D67FA255DEF0900447317 /* SceneDelegate.swift in Sources */,
 				4E7D682B255DF2BB00447317 /* TableViewController.swift in Sources */,
+				4EAF195C2576F2430053596A /* PlantStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

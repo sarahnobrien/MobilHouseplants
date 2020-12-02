@@ -9,26 +9,23 @@ import UIKit
 
 //consider putting a UItable view in a UITableViewCell for the categories
 
-class plantAreas{
-    var plantLocation: String?
-    var plants: [String?]
-    var lastWatered: [String?]
-    
-    init(plantLocation: String?, plants: [String?], lastWatered: [String?]){
-        self.plantLocation = plantLocation
-        self.plants = plants
-        self.lastWatered = lastWatered
-         }
-}
 
 var plantIndex = 0
 var locationIndex = 0
-var plantLoc  = [plantAreas]()
+//var plantLoc  = [Item]()
 class TableViewController: UITableViewController {
+    
+    var plantStore: PlantStore!
 
     @IBAction func addNewItem(_ sender: UIButton){
-        //this might be hard bc i cant move it after plantloc i think
+        let newPlant = plantStore.createPlant()
         
+        if let index = plantStore.allPlants.index(of: newPlant) {
+            let indexPath = IndexPath(row: index, section: 0)
+        // Insert this new row into the table
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        
+        }
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton){
@@ -45,12 +42,16 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        plantLoc.append(plantAreas.init(plantLocation: "Kitchen", plants: ["Thai Basil", "Italian Parsely"], lastWatered: ["11/10/2020", "11/10/2020"]))
-        
-        plantLoc.append(plantAreas.init(plantLocation: "Bedroom", plants: ["Purple Oxalis", "Monstera"], lastWatered: ["11/30/2020", "11/30/2020"] ))
-        
-        plantLoc.append(plantAreas.init(plantLocation: "Living Room", plants: ["Neon Pothos", "Monstera Adonsonaii"], lastWatered: ["11/20/2020", "11/2/2020"] ))
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = insets
+        tableView.scrollIndicatorInsets = insets
+//
+//        plantLoc.append(Item.init(plantLocation: "Kitchen", plants: ["Thai Basil", "Italian Parsely"], lastWatered: ["11/10/2020", "11/10/2020"]))
+//
+//        plantLoc.append(Item.init(plantLocation: "Bedroom", plants: ["Purple Oxalis", "Monstera"], lastWatered: ["11/30/2020", "11/30/2020"] ))
+//
+//        plantLoc.append(Item.init(plantLocation: "Living Room", plants: ["Neon Pothos", "Monstera Adonsonaii"], lastWatered: ["11/20/2020", "11/2/2020"] ))
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -62,30 +63,28 @@ class TableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return plantLoc.count
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // old return plantLoc.count
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return plantLoc[section].plants.count ?? 0 //0 is default if nothing in the section
-        //return plants.count
+      //old  return plantLoc[section].plants.count ?? 0 //0 is default if nothing in the section
+        return plantStore.allPlants.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //locationIndex = indexPath.section
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = plantLoc[indexPath.section].plants[indexPath.row]
-        //locationIndex = plantLoc[indexPath
-        //cell.textLabel?.text = plants[indexPath.row]
+        let plant = plantStore.allPlants[indexPath.row]
+        cell.textLabel?.text = plant.plantName
+    //old    cell.textLabel?.text = plantLoc[indexPath.section].plants[indexPath.row]
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        //locationIndex = plantLoc[indexPath.section].plantLocation
-    
-        return plantLoc[section].plantLocation
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        //locationIndex = plantLoc[indexPath.section].plantLocation
+//    //old    return plantLoc[section].plantLocation
+//    }
     
    
     
@@ -117,14 +116,15 @@ class TableViewController: UITableViewController {
 //    }
    // Override to support editing the table view.
    
-    // MARK: - DELETE PORTION COME BACK ASFJHBG.
+    // MARK: - DELETE PORTION COME BACK ASFJHBG. get so alert pops
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         //showAlert()
 
         if editingStyle == .delete {
             //Delete the row from the data source
-            plantLoc[plantLocation].plants.remove(at: indexPath.row)
+            //plantLoc[indexPath.section].plants[indexPath.row]
+     //old       plantLoc[indexPath.section].plants.remove(at: indexPath.row)
            tableView.deleteRows(at: [indexPath], with: .fade)
        } else if editingStyle == .insert {
             //Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
