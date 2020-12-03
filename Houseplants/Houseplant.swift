@@ -7,19 +7,17 @@
 
 import UIKit
 
-class Houseplant: NSObject, Codable{
+class Houseplant: NSObject, NSCoding, Codable{
     
-    var plantLocation: String?
-    var plantName: String?
-    var lastWatered: String?
-    let plantKey: String
+    var plantLocation: String
+    var plantName: String
+    var lastWatered: String
     
-    init(plantLocation: String?, plantName: String?, lastWatered: String?){
+    init(plantLocation: String, plantName: String, lastWatered: String){
         self.plantLocation = plantLocation
         self.plantName = plantName
         self.lastWatered = lastWatered
-        self.plantKey = UUID().uuidString
-        //super.init()
+
          }
     
     
@@ -41,12 +39,19 @@ class Houseplant: NSObject, Codable{
         self.init(plantLocation: randomLocation, plantName: randomPlant, lastWatered: randomWatered)
          }
      else {
-            self.init(plantLocation: nil, plantName: nil, lastWatered: nil)
+            self.init(plantLocation: "", plantName: "", lastWatered: "")
      }
     }
+    
+    required init(coder aDecoder: NSCoder) {
+             plantLocation = aDecoder.decodeObject(forKey: "plantLocation") as! String
+             plantName = aDecoder.decodeObject(forKey: "plantName") as! String
+             lastWatered = aDecoder.decodeObject(forKey: "lastWatered") as! String
+             super.init()
+        }
+    func encode(with aCoder: NSCoder) {
+             aCoder.encode(plantLocation, forKey: "plantLocation")
+             aCoder.encode(plantName, forKey: "plantName")
+             aCoder.encode(lastWatered, forKey: "lastWatered")
+        }
 }
-//extension Houseplant: Equatable{
-//    static func ==(lhs: Houseplant, rhs: Houseplant) -> Bool{
-//        return lhs.plantKey == rhs.plantKey
-//    }
-//}

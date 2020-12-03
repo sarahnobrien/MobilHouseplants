@@ -24,7 +24,6 @@ class ViewController: UIViewController, UITextFieldDelegate{
         nameField.text = plant.plantName
         locationField.text = plant.plantLocation
         wateredField.text = plant.lastWatered
-        //let plantKey = plant.plantKey
     }
     
     override func viewWillDisappear(_ animated: Bool) {

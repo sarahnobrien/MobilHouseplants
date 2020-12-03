@@ -17,17 +17,16 @@ class PlantStore {
         }()
     
     init() {
-            if let data = try? Data(contentsOf: plantArchiveURL),
-                let archivedPlants = try? PropertyListDecoder().decode(Array<Houseplant>.self, from: data) {
+        do{
+            let data = try Data(contentsOf: plantArchiveURL)
+            if let archivedPlants = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Houseplant] {
                 allPlants = archivedPlants
             }
+            }catch {
+                allPlants = []
         }
-//    init(){
-//        for _ in 0..<5{
-//            createPlant()
-//        }
-//    }
-
+    }
+    
     @discardableResult func createPlant() -> Houseplant {
          let newPlant = Houseplant(random: true)
          allPlants.append(newPlant)
@@ -39,15 +38,14 @@ class PlantStore {
         allPlants.remove(at: index)
         }
     }
-    func saveChanges() {
-            print("Saving items to: \(plantArchiveURL.path)")
-            let archivedPlants = try? PropertyListEncoder().encode(allPlants)
-            
-            do {
-                try archivedPlants?.write(to: plantArchiveURL, options: .noFileProtection)
-                print("Saved all ot the Items")
+    func saveChanges() -> Bool {
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: allPlants, requiringSecureCoding: false)
+            try data.write(to: plantArchiveURL)
+                return true
             } catch {
-                print("Could not save any of the Items")
+                return false
+                }
+                
             }
-        }
 }
