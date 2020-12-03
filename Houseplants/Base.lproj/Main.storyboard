@@ -70,6 +70,13 @@
                                 </subviews>
                                 <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                             </stackView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgU-cC-av1">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Item" image="trash" catalog="system" id="wd5-UY-lpa"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PCa-lu-kln"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -84,6 +91,7 @@
                     <connections>
                         <outlet property="locationField" destination="IoT-eU-Gfg" id="9yO-ca-PTi"/>
                         <outlet property="nameField" destination="XBc-al-eYX" id="po5-Qh-L4s"/>
+                        <outlet property="trashDelete" destination="wd5-UY-lpa" id="l7h-1S-Mka"/>
                         <outlet property="wateredField" destination="Nmk-qR-ALT" id="sbS-1R-UaX"/>
                     </connections>
                 </viewController>
@@ -176,6 +184,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

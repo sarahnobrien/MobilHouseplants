@@ -7,8 +7,7 @@
 
 import UIKit
 
-class Houseplant: Codable{
-    
+class Houseplant: NSObject, Codable{
     
     var plantLocation: String?
     var plantName: String?
@@ -26,7 +25,7 @@ class Houseplant: Codable{
     
     convenience init(random: Bool = false) {
      if random {
-        let newPlant = ["Oxalis", "Monstera", "Thai Basil"]
+        let newPlant = ["Purple Oxalis", "Monstera Deliciosa", "Thai Basil", "Golden Pothos", "Thanksgiving Cactus"]
         let newLocation = ["Kitchen", "Bedroom", "Living Room"]
         let newWatered = ["11/20/2020", "11/4/2020", "12/1/2020"]
 
@@ -46,8 +45,8 @@ class Houseplant: Codable{
      }
     }
 }
-extension Houseplant: Equatable{
-    static func ==(lhs: Houseplant, rhs: Houseplant) -> Bool{
-        return lhs.plantKey == rhs.plantKey
-    }
-}
+//extension Houseplant: Equatable{
+//    static func ==(lhs: Houseplant, rhs: Houseplant) -> Bool{
+//        return lhs.plantKey == rhs.plantKey
+//    }
+//}

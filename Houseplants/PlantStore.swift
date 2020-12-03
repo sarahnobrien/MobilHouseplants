@@ -22,16 +22,12 @@ class PlantStore {
                 allPlants = archivedPlants
             }
         }
-    
-    
-    
 //    init(){
 //        for _ in 0..<5{
 //            createPlant()
 //        }
 //    }
 
-    
     @discardableResult func createPlant() -> Houseplant {
          let newPlant = Houseplant(random: true)
          allPlants.append(newPlant)
@@ -39,7 +35,7 @@ class PlantStore {
     }
     
     func removePlant(_ plant: Houseplant) {
-     if let index = allPlants.index(of: plant) {
+        if let index = allPlants.firstIndex(of: plant) {
         allPlants.remove(at: index)
         }
     }
@@ -55,9 +51,3 @@ class PlantStore {
             }
         }
 }
-    
-
-    
-
-
-

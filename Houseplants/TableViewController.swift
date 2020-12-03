@@ -6,8 +6,6 @@
 //
 
 import UIKit
-var plantIndex = 0
-var locationIndex = 0
 class TableViewController: UITableViewController {
     
     var plantStore: PlantStore!
@@ -19,12 +17,11 @@ class TableViewController: UITableViewController {
     @IBAction func addNewItem(_ sender: UIButton){
         let newPlant = plantStore.createPlant()
         
-        if let index = plantStore.allPlants.index(of: newPlant) {
+        if let index = plantStore.allPlants.firstIndex(of: newPlant) {
             let indexPath = IndexPath(row: index, section: 0)
-        // Insert this new row into the table
             tableView.insertRows(at: [indexPath], with: .automatic)
-        
         }
+        //plantStore.saveChanges()
     }
     
     @IBAction func toggleEditingMode(_ sender: UIButton){
@@ -36,6 +33,7 @@ class TableViewController: UITableViewController {
             sender.setTitle("Done", for: .normal)
             setEditing(true, animated: true)
         }
+        //plantStore.saveChanges()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +43,7 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let insets = UIEdgeInsets(top: statusBarHeight, left: 0, bottom: 0, right: 0)
-        tableView.contentInset = insets
-        tableView.scrollIndicatorInsets = insets
+
         
         //Houseplant.saveHouseplantsToUserDefaults(plants: plantStore.allPlants)
         
@@ -102,19 +97,10 @@ class TableViewController: UITableViewController {
         }
    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        plantIndex = indexPath.row
-        locationIndex = indexPath.section
         performSegue(withIdentifier: "viewControllerSegue", sender: self)
 
     }
     
-
-//    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        return .delete
-//    }
-    
-
-   // Override to support editing the table view.
    
     // MARK: - DELETE PORTION COME BACK ASFJHBG. get so alert pops
     
@@ -152,31 +138,5 @@ class TableViewController: UITableViewController {
     }
     */
 
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+ 
 }

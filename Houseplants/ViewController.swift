@@ -8,14 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate{
-//    @IBOutlet weak var plantName: UILabel?
-//    @IBOutlet weak var plantLocations: UILabel?
-//   // @IBOutlet weak var waterDate: UILabel!
-//
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var wateredField: UITextField!
+    @IBOutlet weak var trashDelete: UIBarButtonItem!
     
     
     var plant: Houseplant!
@@ -40,14 +37,14 @@ class ViewController: UIViewController, UITextFieldDelegate{
     }
     
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        //plantStore.saveChanges()
+        plantStore.saveChanges()
         view.endEditing(true)
         }
         
-//        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//            textField.resignFirstResponder()
-//            return true
-//    }
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
+    }
 }
 
 
